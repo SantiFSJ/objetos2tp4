@@ -14,19 +14,21 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import ar.unrn.tp4.modelo.Participante;
 import ar.unrn.tp4.modelo.RepositorioParticipantes;
+import ar.unrn.tp4.modelo.SistemaParticipantes;
 
 public class UI extends JFrame {
 
 	private RepositorioParticipantes repo;
+	private SistemaParticipantes sistPart;
 
 	private JTextField nombre;
 	private JTextField telefono;
 	private JTextField region;
 
-	public UI(RepositorioParticipantes repo) {
+	public UI(RepositorioParticipantes repo, SistemaParticipantes sistPart) {
 		this.repo = repo;
+		this.sistPart = sistPart;
 		setupUIComponents();
 	}
 
@@ -66,6 +68,7 @@ public class UI extends JFrame {
 
 	private void onBotonCargar() {
 
+		// Lllevarlo al modelo
 		if (nombre.getText().equals("")) {
 			JOptionPane.showMessageDialog(this, "Debe cargar un nombre");
 			return;
@@ -84,7 +87,10 @@ public class UI extends JFrame {
 		}
 
 		try {
-			this.repo.nuevoParticipante(new Participante(nombre.getText(), telefono.getText(), region.getText()));
+			// this.repo.nuevoParticipante(new Participante(nombre.getText(),
+			// telefono.getText(), region.getText()));
+			this.repo.nuevoParticipante(
+					this.sistPart.nuevoParticipante(nombre.getText(), telefono.getText(), region.getText()));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

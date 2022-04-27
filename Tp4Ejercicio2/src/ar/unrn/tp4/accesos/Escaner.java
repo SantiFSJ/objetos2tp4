@@ -6,23 +6,19 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.mail.MessagingException;
-
 import ar.unrn.tp4.modelo.Empleado;
 import ar.unrn.tp4.modelo.RepositorioEmpleados;
 
-public class Escaner {
+public class Escaner implements RepositorioEmpleados {
 
-	private RepositorioEmpleados repo;
+	private String filename;
 
-	public Escaner() {
+	public Escaner(String filename) {
+		this.filename = filename;
 	}
 
-	public Escaner(RepositorioEmpleados repo) {
-		this.repo = repo;
-	}
-
-	public void leerArchivo(String filename) throws IOException {
+	@Override
+	public List<Empleado> leerArchivo() throws IOException {
 
 		List<String> fileData = Files.readAllLines(Paths.get(filename));
 
@@ -33,12 +29,7 @@ public class Escaner {
 			listaEmpleados.add(new Empleado(camposFila[0], camposFila[1], camposFila[2], camposFila[3]));
 		}
 
-		try {
-			repo.evaluarCumpleañosEmpleados(listaEmpleados);
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		return listaEmpleados;
 
 	}
 }

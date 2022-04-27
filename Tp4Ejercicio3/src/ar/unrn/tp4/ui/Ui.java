@@ -41,13 +41,11 @@ public class Ui {
 	private ArrayList<Concurso> concursosAbiertos = new ArrayList<>();
 
 	private LectorConcursos lector;
-	private String archivoConcursos;
 	private RepositorioInscriptos repoInscriptos;
 
-	public Ui(LectorConcursos lector, String archivoConcursos, RepositorioInscriptos repoInscriptos) {
+	public Ui(LectorConcursos lector, RepositorioInscriptos repoInscriptos) {
 
 		this.lector = lector;
-		this.archivoConcursos = archivoConcursos;
 		this.repoInscriptos = repoInscriptos;
 
 		var frame = new JFrame("Inscription to Competition");
@@ -99,7 +97,7 @@ public class Ui {
 		ArrayList<Concurso> concursos = new ArrayList<>();
 
 		try {
-			concursos = lector.leerConcuros(this.archivoConcursos);
+			concursos = lector.leerConcuros();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -120,7 +118,7 @@ public class Ui {
 			ArrayList<Concurso> concursos = new ArrayList<>();
 
 			try {
-				concursos = lector.leerConcuros(this.archivoConcursos);
+				concursos = lector.leerConcuros();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

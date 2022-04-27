@@ -1,7 +1,5 @@
-package ar.unrn.tp4.servicios;
+package ar.unrn.tp4.webServices;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -12,21 +10,11 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import ar.unrn.tp4.modelo.Empleado;
-import ar.unrn.tp4.modelo.RepositorioEmpleados;
+import ar.unrn.tp4.modelo.Mandador;
 
-public class BirthdayEmailSender implements RepositorioEmpleados {
+public class BirthdayEmailSender implements Mandador {
 
-	@Override
-	public void evaluarCumpleañosEmpleados(ArrayList<Empleado> empleados) throws MessagingException {
-		for (Empleado empleado : empleados) {
-			if (empleado.evaluarCumple(LocalDate.now()))
-				mandarEmail(empleado.nombre(), empleado.correoElectronico());
-		}
-
-	}
-
-	private void mandarEmail(String nombre, String correo) throws MessagingException {
+	public void mandarEmail(String nombre, String correo) throws MessagingException {
 		// Put recipient’s address
 		String to = correo;
 
@@ -66,8 +54,6 @@ public class BirthdayEmailSender implements RepositorioEmpleados {
 
 		// Send message
 		Transport.send(message);
-
-		System.out.println("Sent message successfully....");
 
 	}
 }

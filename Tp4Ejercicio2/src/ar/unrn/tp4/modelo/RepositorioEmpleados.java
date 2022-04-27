@@ -1,9 +1,10 @@
 package ar.unrn.tp4.modelo;
 
-import java.util.ArrayList;
-
-import javax.mail.MessagingException;
+import java.io.IOException;
+import java.util.List;
 
 public interface RepositorioEmpleados {
-	public void evaluarCumpleañosEmpleados(ArrayList<Empleado> empleados) throws MessagingException;
+	List<Empleado> leerArchivo() throws IOException;
+	// public void evaluarCumpleañosEmpleados(ArrayList<Empleado> empleados) throws
+	// MessagingException;
 }

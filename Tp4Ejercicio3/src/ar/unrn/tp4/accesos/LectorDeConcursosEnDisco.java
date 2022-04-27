@@ -13,8 +13,8 @@ import ar.unrn.tp4.modelo.LectorConcursos;
 public class LectorDeConcursosEnDisco implements LectorConcursos {
 
 	@Override
-	public ArrayList<Concurso> leerConcuros(String filename) throws IOException {
-		List<String> fileData = Files.readAllLines(Paths.get(filename));
+	public ArrayList<Concurso> leerConcuros() throws IOException {
+		List<String> fileData = Files.readAllLines(Paths.get("C:\\Users\\santi\\OneDrive\\Escritorio\\concursos.txt"));
 
 		ArrayList<Concurso> listaConcursos = new ArrayList<>();
 
@@ -30,9 +30,10 @@ public class LectorDeConcursosEnDisco implements LectorConcursos {
 					Integer.valueOf(camposFechaFin[2]));
 
 			listaConcursos.add(new Concurso(camposFila[0], camposFila[1], fechaIni, fechaFin));
-		}
 
+		}
 		return listaConcursos;
+
 	}
 
 }
