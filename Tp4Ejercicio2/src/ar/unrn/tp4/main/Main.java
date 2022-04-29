@@ -14,6 +14,6 @@ public class Main {
 		Escaner escaner = new Escaner("C:\\Users\\santi\\OneDrive\\Escritorio\\listaEmpleados.txt");
 
 		CumpleEmpleado ce = new CumpleEmpleado(escaner, emailSender);
-		// escaner.leerArchivo("C:\\Users\\santi\\OneDrive\\Escritorio\\listaEmpleados.txt");
+		ce.run();
 	}
 }

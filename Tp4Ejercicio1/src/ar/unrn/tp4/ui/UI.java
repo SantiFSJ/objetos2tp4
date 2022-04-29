@@ -4,6 +4,7 @@ import java.awt.ComponentOrientation;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -68,24 +69,6 @@ public class UI extends JFrame {
 
 	private void onBotonCargar() {
 
-		// Lllevarlo al modelo
-		if (nombre.getText().equals("")) {
-			JOptionPane.showMessageDialog(this, "Debe cargar un nombre");
-			return;
-		}
-		if (telefono.getText().equals("")) {
-			JOptionPane.showMessageDialog(this, "Debe cargar un telefono");
-			return;
-		}
-		if (!validarTelefono(telefono.getText())) {
-			JOptionPane.showMessageDialog(this, "El teléfono debe ingresarse de la siguiente forma: NNNN-NNNNNN");
-			return;
-		}
-		if (!region.getText().equals("China") && !region.getText().equals("US") && !region.getText().equals("Europa")) {
-			JOptionPane.showMessageDialog(this, "Region desconocida. Las conocidas son: China, US, Europa");
-			return;
-		}
-
 		try {
 			// this.repo.nuevoParticipante(new Participante(nombre.getText(),
 			// telefono.getText(), region.getText()));
@@ -94,12 +77,12 @@ public class UI extends JFrame {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
 		}
 
 	}
 
-	private boolean validarTelefono(String telefono) {
-		String regex = "\\d{4}-\\d{6}";
-		return telefono.matches(regex);
-	}
 }

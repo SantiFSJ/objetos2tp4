@@ -17,10 +17,6 @@ public class JDBCEstudiante implements RepositorioParticipantes {
 
 	@Override
 	public void nuevoParticipante(Participante p) throws SQLException {
-		/*
-		 * String url = "jdbc:derby://localhost:1527/participantes"; String user =
-		 * "app"; String password = "app";
-		 */
 
 		this.dbConn = DriverManager.getConnection(url, user, password);
 
@@ -28,7 +24,7 @@ public class JDBCEstudiante implements RepositorioParticipantes {
 				.prepareStatement("insert into participantes(nombre, telefono, region)values(?,?,?)");
 		try {
 			st.setString(1, p.nombre());
-			st.setString(2, p.telefono());
+			st.setString(2, p.telefono().telefono());
 			st.setString(3, p.region());
 			st.executeUpdate();
 		} finally {

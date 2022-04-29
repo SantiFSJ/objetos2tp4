@@ -17,16 +17,9 @@ public class CumpleEmpleado {
 		this.repo = repo;
 		this.mandador = mandador;
 
-		try {
-			this.run();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 	}
 
-	private void run() throws IOException {
+	public void run() throws IOException {
 
 		List<Empleado> empleados = repo.leerArchivo();
 

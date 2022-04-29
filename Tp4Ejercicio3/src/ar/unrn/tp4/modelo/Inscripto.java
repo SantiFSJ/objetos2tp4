@@ -10,7 +10,7 @@ public class Inscripto {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.telefono = telefono;
-		this.email = telefono;
+		this.email = email;
 	}
 
 	public String nombre() {
