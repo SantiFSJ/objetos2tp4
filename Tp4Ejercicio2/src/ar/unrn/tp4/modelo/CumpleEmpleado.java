@@ -6,14 +6,12 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 
-import ar.unrn.tp4.webServices.BirthdayEmailSender;
-
 public class CumpleEmpleado {
 
 	private RepositorioEmpleados repo;
 	private Mandador mandador;
 
-	public CumpleEmpleado(RepositorioEmpleados repo, BirthdayEmailSender mandador) {
+	public CumpleEmpleado(RepositorioEmpleados repo, Mandador mandador) {
 		this.repo = repo;
 		this.mandador = mandador;
 

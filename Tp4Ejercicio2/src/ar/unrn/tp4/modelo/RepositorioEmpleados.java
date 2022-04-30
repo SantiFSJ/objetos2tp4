@@ -5,6 +5,4 @@ import java.util.List;
 
 public interface RepositorioEmpleados {
 	List<Empleado> leerArchivo() throws IOException;
-	// public void evaluarCumpleañosEmpleados(ArrayList<Empleado> empleados) throws
-	// MessagingException;
 }
