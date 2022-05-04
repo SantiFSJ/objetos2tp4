@@ -15,16 +15,10 @@ public class Participante {
 	}
 
 	private void validar(String nombre, String region) throws IOException {
-		if (nombre.equals("")) {
+		if (nombre.equals(""))
 			throw new IOException("Debe Cargar Un Nombre");
-			// JOptionPane.showMessageDialog(this, "Debe cargar un nombre");
-
-		}
-
-		if (!region.equals("China") && !region.equals("US") && !region.equals("Europa")) {
+		if (!region.equals("China") && !region.equals("US") && !region.equals("Europa"))
 			throw new IOException("Region desconocida. Las conocidas son: China, US, Europa");
-			// JOptionPane.showMessageDialog(this, );
-		}
 	}
 
 	public String nombre() {

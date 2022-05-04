@@ -17,8 +17,8 @@ public class EnBaseDeDatosRegistroInscripto implements RepositorioInscriptos {
 					"INSERT INTO inscriptos(apellido,nombre,telefono,email,id_concurso) " + "VALUES (?,?,?,?,?)");
 			statement.setString(1, inscripto.apellido());
 			statement.setString(2, inscripto.nombre());
-			statement.setString(3, inscripto.telefono());
-			statement.setString(4, inscripto.email());
+			statement.setString(3, inscripto.telefono().telefono());
+			statement.setString(4, inscripto.email().email());
 			statement.setString(5, idConcurso);
 			statement.executeUpdate();
 

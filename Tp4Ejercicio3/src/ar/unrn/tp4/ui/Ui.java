@@ -18,9 +18,9 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
 import ar.unrn.tp4.modelo.Concurso;
-import ar.unrn.tp4.modelo.Inscripto;
 import ar.unrn.tp4.modelo.LectorConcursos;
 import ar.unrn.tp4.modelo.RepositorioInscriptos;
+import ar.unrn.tp4.modelo.SistemaInscriptos;
 
 public class Ui {
 	private JPanel contentPane;
@@ -42,11 +42,13 @@ public class Ui {
 
 	private LectorConcursos lector;
 	private RepositorioInscriptos repoInscriptos;
+	private SistemaInscriptos sistemaInscriptos;
 
-	public Ui(LectorConcursos lector, RepositorioInscriptos repoInscriptos) {
+	public Ui(LectorConcursos lector, RepositorioInscriptos repoInscriptos, SistemaInscriptos sistemaInscriptos) {
 
 		this.lector = lector;
 		this.repoInscriptos = repoInscriptos;
+		this.sistemaInscriptos = sistemaInscriptos;
 
 		var frame = new JFrame("Inscription to Competition");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -132,34 +134,27 @@ public class Ui {
 
 			Concurso c = concursosAbiertos.get(comboBox.getSelectedIndex());
 
-			Inscripto temp = new Inscripto(txtName.getText(), txtLastName.getText(), txtPhone.getText(),
-					txtEmail.getText());
-			repoInscriptos.guardarInscripto(temp, c.id());
+			try {
+				repoInscriptos.guardarInscripto(this.sistemaInscriptos.nuevoInscripto(txtName.getText(),
+						txtLastName.getText(), txtId.getText(), txtPhone.getText(), txtEmail.getText()), c.id());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			}
 		}
 	}
 
 	private boolean validations() {
-		if ("".equals(txtName.getText())) {
-			JOptionPane.showMessageDialog(this.contentPane, "Nombre no puede ser vacio");
-			return false;
-		}
-		if ("".equals(txtLastName.getText())) {
-			JOptionPane.showMessageDialog(this.contentPane, "apellido no puede ser vacio");
-			return false;
-		}
-		if ("".equals(txtId.getText())) {
-			JOptionPane.showMessageDialog(this.contentPane, "dni no puede ser vacio");
-			return false;
-		}
-		if (!checkEmail(txtEmail.getText())) {
-			JOptionPane.showMessageDialog(this.contentPane, "email debe ser válido");
-			return false;
-		}
-		if (!checkPhone(txtPhone.getText())) {
-			JOptionPane.showMessageDialog(this.contentPane,
-					"El teléfono debe ingresarse de la siguiente forma: NNNN-NNNNNN");
-			return false;
-		}
+
+		/*
+		 * if (!checkEmail(txtEmail.getText())) {
+		 * JOptionPane.showMessageDialog(this.contentPane, "email debe ser válido");
+		 * return false; } if (!checkPhone(txtPhone.getText())) {
+		 * JOptionPane.showMessageDialog(this.contentPane,
+		 * "El teléfono debe ingresarse de la siguiente forma: NNNN-NNNNNN"); return
+		 * false; }
+		 */
 		if (this.comboBox.getSelectedIndex() < 0) {
 			JOptionPane.showMessageDialog(this.contentPane, "Debe elegir un Concurso");
 			return false;
@@ -167,15 +162,14 @@ public class Ui {
 		return true;
 	}
 
-	private boolean checkEmail(String email) {
-		String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
-		return email.matches(regex);
-	}
-
-	private boolean checkPhone(String telefono) {
-		String regex = "\\d{4}-\\d{6}";
-		return telefono.matches(regex);
-	}
+	/*
+	 * private boolean checkEmail(String email) { String regex =
+	 * "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$"; return
+	 * email.matches(regex); }
+	 * 
+	 * private boolean checkPhone(String telefono) { String regex = "\\d{4}-\\d{6}";
+	 * return telefono.matches(regex); }
+	 */
 
 	private void layout() {
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
